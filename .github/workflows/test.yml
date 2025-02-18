@@ -1,0 +1,33 @@
+name: zls Build
+
+on:
+  workflow_dispatch:
+#   schedule:
+#     - cron: '0 0 * * *'
+#   push:
+#     branches:
+#       - main
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Build Pack Zls
+        run: |
+          sudo apt update
+          sudo apt install apparmor apparmor-utils bridge-utils libvirt-clients libvirt-daemon-system libguestfs-tools qemu-kvm virt-manager
+          sudo apt install binwalk casper genisoimage live-boot live-boot-initramfs-tools squashfs-tools
+          sudo mkdir ~/custom_live_cd
+          sudo mv ubuntu-22.04.1-desktop-amd64.iso ~/custom_live_cd
+          sudo cd ~/custom_live_cd
+    #   - uses: actions/upload-artifact@v4
+    #     with:
+    #       name: zls_master_ReleaseFast
+    #       path: C:\zls_master_ReleaseFast.7z
+    #   - name: Update zls Release
+    #     uses: softprops/action-gh-release@v2
+    #     with:
+    #       tag_name: zls-build
+    #       files: |
+    #         C:\zls_master_ReleaseSafe.7z
+    #         C:\zls_master_ReleaseFast.7z
